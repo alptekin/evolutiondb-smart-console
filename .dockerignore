@@ -1,0 +1,9 @@
+build/
+.git/
+.github/
+CLAUDE.md
+docker-compose.yml
+.DS_Store
+.vscode/
+.idea/
+.cache/
