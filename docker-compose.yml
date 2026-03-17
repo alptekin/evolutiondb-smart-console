@@ -1,0 +1,25 @@
+services:
+  evosql:
+    build:
+      context: ../evolutiondb
+    ports:
+      - "5433:5433"
+      - "9967:9967"
+    environment:
+      EVOSQL_USER_NAME: admin
+      EVOSQL_PASSWORD: admin
+
+  nl-service:
+    build: .
+    ports:
+      - "9970:9970"
+    environment:
+      EVOSQL_NL_PROVIDER: ollama
+      OLLAMA_HOST: http://host.docker.internal:11434
+      EVOSQL_HOST: evosql
+      EVOSQL_PORT: "9967"
+      EVOSQL_USER: admin
+      EVOSQL_PASSWORD: admin
+    depends_on:
+      evosql:
+        condition: service_started
